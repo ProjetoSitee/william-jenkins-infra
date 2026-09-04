@@ -61,7 +61,8 @@ def call(Map config = [:]) {
                     expression { config.buildImage && env.BRANCH_NAME == 'main' }
                 }
                 steps {
-                    sh 'docker build -t ${IMAGE_TAG} .'
+                    sh 'mvn -B jib:buildTar -Djib.to.image=${IMAGE_TAG}'
+                    archiveArtifacts artifacts: 'target/jib-image.tar', fingerprint: true
                 }
             }
         }

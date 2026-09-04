@@ -14,6 +14,8 @@ Configuração versionada do Jenkins para executar o pipeline do repositório `P
 
 O arquivo `.env` e quaisquer chaves são ignorados pelo Git. Na AWS, os segredos deverão ficar no Jenkins Credentials e/ou AWS Secrets Manager, nunca no GitHub.
 
+O Jenkins não recebe acesso ao socket Docker do computador. O pipeline cria uma imagem OCI em arquivo com Jib, sem daemon privilegiado; futuramente esse estágio poderá publicar diretamente no Amazon ECR.
+
 ## Próxima etapa
 
 Depois de escolher onde o Jenkins será hospedado, conecte um Pipeline Multibranch a:
