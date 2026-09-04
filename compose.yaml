@@ -2,13 +2,14 @@ services:
   jenkins:
     build: .
     restart: unless-stopped
+    mem_limit: 2g
     ports:
       - "8080:8080"
       - "50000:50000"
     environment:
       JENKINS_ADMIN_ID: ${JENKINS_ADMIN_ID}
       JENKINS_ADMIN_PASSWORD: ${JENKINS_ADMIN_PASSWORD}
-      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false -Xms256m -Xmx1g
     volumes:
       - jenkins_home:/var/jenkins_home
       - ./casc:/var/jenkins_home/casc:ro

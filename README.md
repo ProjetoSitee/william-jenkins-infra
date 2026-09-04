@@ -16,6 +16,8 @@ O arquivo `.env` e quaisquer chaves são ignorados pelo Git. Na AWS, os segredos
 
 O Jenkins não recebe acesso ao socket Docker do computador. O pipeline cria uma imagem OCI em arquivo com Jib, sem daemon privilegiado; futuramente esse estágio poderá publicar diretamente no Amazon ECR.
 
+O contêiner está limitado a 2 GB de memória, com heap máximo de 1 GB para a JVM. O volume do Jenkins usa armazenamento dinâmico do Docker Desktop: o espaço exibido na tela de nós é o espaço disponível no disco virtual, não uma reserva feita pelo Jenkins. A retenção dos dez builds mais recentes limita o crescimento dos artefatos.
+
 ## Próxima etapa
 
 Depois de escolher onde o Jenkins será hospedado, conecte um Pipeline Multibranch a:
