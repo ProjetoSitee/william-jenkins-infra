@@ -34,25 +34,21 @@ def call(Map config = [:]) {
                 }
             }
 
-            stage('Testes') {
+            stage('Testes e qualidade') {
                 steps {
-                    sh 'mvn -B clean test'
+                    sh 'mvn -B clean verify'
                 }
                 post {
                     always {
                         junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: false
+                        archiveArtifacts artifacts: 'target/site/jacoco/**', allowEmptyArchive: false
                     }
                 }
             }
 
             stage('Pacote') {
                 steps {
-                    sh 'mvn -B package -DskipTests'
-                }
-                post {
-                    success {
-                        archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-                    }
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
                 }
             }
 

@@ -8,7 +8,7 @@ Configuração versionada do Jenkins para executar o pipeline do repositório `P
 - `plugins.txt`: plugins instalados automaticamente.
 - `casc/jenkins.yaml`: segurança e ferramentas via Jenkins Configuration as Code.
 - `compose.yaml`: definição reproduzível do serviço.
-- `vars/standardPipeline.groovy`: Shared Library reutilizável para aplicações Java.
+- `vars/standardPipeline.groovy`: Shared Library reutilizável para aplicações Java, com testes, porta de qualidade e artefatos.
 
 ## Segurança
 
@@ -26,4 +26,4 @@ A infraestrutura AWS será adicionada separadamente para manter criação e cust
 
 ## Uso na aplicação
 
-O Jenkinsfile da aplicação importa `william-devops-pipelines` e chama `standardPipeline` com Java 21, Spring Boot e criação de imagem habilitados. A lógica comum permanece centralizada neste repositório.
+O Jenkinsfile da aplicação importa `william-devops-pipelines` e chama `standardPipeline` com Java 21, Spring Boot e criação de imagem habilitados. A lógica comum permanece centralizada neste repositório. O estágio `Testes e qualidade` executa `mvn clean verify`, publica os resultados JUnit e arquiva o relatório JaCoCo.
