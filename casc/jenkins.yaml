@@ -35,3 +35,15 @@ tool:
                 - maven:
                     id: "3.9.11"
 
+unclassified:
+  globalLibraries:
+    libraries:
+      - name: "william-devops-pipelines"
+        defaultVersion: "main"
+        allowVersionOverride: false
+        includeInChangesets: true
+        retriever:
+          modernSCM:
+            scm:
+              git:
+                remote: "https://github.com/ProjetoSitee/william-jenkins-infra.git"
